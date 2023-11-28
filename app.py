@@ -57,8 +57,20 @@ def create_tables():
     return 'Tables created successfully!'
 
 
+@app.route('/search', methods = ['GET','POST'])
+def search():
+    if request.method == 'POST':
+        search_term = request.form['search_term']
+        # Assuming you have a 'title' field in your Todo model
+        print(search_term)
+        results = Todo.query.filter(Todo.title.ilike(f"%{search_term}%")).all()
+        print(results)
+        return render_template('search.html', results=results, search_term=search_term)
 
-
+    return redirect('/')
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block body %}
+<h2>Search Results for "{{ search_term }}"</h2>
+
+{% if results %}
+<table class="table my-5">
+    <thead>
+      <tr>
+        <th scope="col">S.No</th>
+        <th scope="col">Title</th>
+        <th scope="col">Discription</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        {% for t in results  %}
+        <tr>
+        <th scope="row">{{loop.index}}</th>
+        <td>{{t.title}}</td>
+        <td>{{t.desc}}</td>
+        <td><a href="/delete/{{t.sno}}" type="button" class="btn btn-outline-dark btn-sm mx-1">Delete</button>
+          <a href="/update/{{t.sno}}" type="button" class="btn btn-outline-dark btn-sm mx-1">Update</button>
+      </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+ 
+{% else %}
+    <p>No results found.</p>
+{% endif %}
+{% endblock body %}
+
+<table class="table my-5">
+    <thead>
+      <tr>
+        <th scope="col">S.No</th>
+        <th scope="col">Title</th>
+        <th scope="col">Discription</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        {% for t in todo  %}
+        <tr>
+        <th scope="row">{{loop.index}}</th>
+        <td>{{t.title}}</td>
+        <td>{{t.desc}}</td>
+        <td><a href="/delete/{{t.sno}}" type="button" class="btn btn-outline-dark btn-sm mx-1">Delete</button>
+          <a href="/update/{{t.sno}}" type="button" class="btn btn-outline-dark btn-sm mx-1">Update</button>
+      </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+ 
