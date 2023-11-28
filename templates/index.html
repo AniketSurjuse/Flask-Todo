@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block body %}
+    
+<div class="container my-4">
+    <h2>Add ToDo</h2>
+    <form action="/" method="POST">
+      <div class="mb-3">
+        <label for="title" class="form-label"
+          >Title</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          name="title"
+  
+        />
+      </div>
+      <div class="mb-3">
+        <label for="desc" class="form-label">Description</label>
+        <input
+          type="text"
+          class="form-control"
+          id="desc"
+          name="desc"
+        />
+      </div>
+      <button type="submit" class="btn btn-dark">Submit</button>
+    </form>
+
+    {% if todo|length != 0 %}
+    <table class="table my-5">
+        <thead>
+          <tr>
+            <th scope="col">S.No</th>
+            <th scope="col">Title</th>
+            <th scope="col">Discription</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            {% for t in todo  %}
+            <tr>
+            <th scope="row">{{loop.index}}</th>
+            <td>{{t.title}}</td>
+            <td>{{t.desc}}</td>
+            <td><a href="/delete/{{t.sno}}" type="button" class="btn btn-outline-dark btn-sm mx-1">Delete</button>
+              <a href="/update/{{t.sno}}" type="button" class="btn btn-outline-dark btn-sm mx-1">Update</button>
+          </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+     
+      {% else %}
+      <div class="alert alert-dark my-5" role="alert">
+        Your ToDo is Empty. Add Todos Now!!
+      </div>
+    {% endif %}
+  </div>
+  
+
+{% endblock body %}
